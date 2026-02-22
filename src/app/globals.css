@@ -1,0 +1,368 @@
+@import "tailwindcss";
+
+/* YITE Marketing - Palette inspirée d'inDrive */
+:root {
+  /* Couleurs principales */
+  --main-green: #C1F11D;
+  --main-green-hover: #9DD90D;
+  --main-green-active: #8BC70A;
+  --main-dark: #141414;
+  --main-white: #FFFFFF;
+  --main-blue-bg: #E4FFF2;
+
+  /* Couleurs secondaires */
+  --main-grey: rgba(20, 20, 20, 0.8);
+  --main-soft-beige: #F4F3D8;
+  --neutral-beige: #DCDBC7;
+  --main-dark-bg: #3F3F3F;
+  --font-color: #8C8C8C;
+  --badge-bg-1: #D9F1FF;
+  --error: #FF5A5A;
+  --link: #497FC6;
+  --light-grey-01: rgba(0, 0, 0, 0.1);
+
+  /* Theme */
+  --background: var(--main-blue-bg);
+  --foreground: var(--main-dark);
+
+  /* Typography scale */
+  --text-h1: clamp(2rem, 5vw, 3.5rem);
+  --text-h2: clamp(1.75rem, 4vw, 2.5rem);
+  --text-h3: clamp(1.25rem, 2.5vw, 1.75rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+
+  /* Spacing scale */
+  --space-section-mobile: 3rem;
+  --space-section-tablet: 4rem;
+  --space-section-desktop: 5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-main-green: var(--main-green);
+  --color-main-green-hover: var(--main-green-hover);
+  --color-main-dark: var(--main-dark);
+  --color-main-white: var(--main-white);
+  --color-main-blue-bg: var(--main-blue-bg);
+  --color-main-soft-beige: var(--main-soft-beige);
+  --color-neutral-beige: var(--neutral-beige);
+  --color-main-grey: var(--main-grey);
+  --font-sans: var(--font-poppins);
+  --font-display: var(--font-agrandir);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins), Arial, sans-serif;
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--main-green);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip to content link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--main-green);
+  color: var(--main-dark);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==================== SCROLLBAR ==================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--main-blue-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--main-green);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-green-hover);
+}
+
+/* ==================== ANIMATIONS ==================== */
+
+/* Effet highlight/marqueur sur texte */
+.highlight-marker {
+  position: relative;
+  display: inline;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0 15 Q25 5, 50 12 T100 10' stroke='%23C1F11D' stroke-width='15' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 100% 70%;
+  background-position: center bottom;
+  padding: 0 4px;
+}
+
+/* Pulse animation for real-time indicators */
+@keyframes pulse-green {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Float animation for decorative elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+/* ==================== MICRO-INTERACTIONS ==================== */
+
+/* Button hover effect */
+.btn-hover-effect {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(193, 241, 29, 0.3);
+}
+
+.btn-hover-effect:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(193, 241, 29, 0.2);
+}
+
+/* Link underline animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--main-green);
+  transition: width 0.3s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon scale on hover */
+.icon-hover {
+  transition: transform 0.2s ease;
+}
+
+.icon-hover:hover {
+  transform: scale(1.1);
+}
+
+/* ==================== COMPONENT STYLES ==================== */
+
+/* Cards */
+.card {
+  background: var(--main-white);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+/* Badge circle */
+.badge-circle {
+  width: 45px;
+  height: 45px;
+  background: var(--main-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Section tag/label */
+.section-tag {
+  background: var(--main-soft-beige);
+  color: var(--main-dark);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+/* Pill/Chip */
+.pill {
+  border: 1px solid var(--light-grey-01);
+  border-radius: 9999px;
+  padding: 12px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--main-white);
+  transition: all 0.2s ease;
+}
+
+.pill:hover {
+  background: var(--main-soft-beige);
+  border-color: var(--main-green);
+}
+
+/* FAQ Accordion */
+.faq-item {
+  background: var(--main-white);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.faq-button {
+  width: 40px;
+  height: 40px;
+  background: var(--main-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.faq-button:hover {
+  background: var(--main-green-hover);
+  transform: scale(1.05);
+}
+
+.faq-button.open {
+  transform: rotate(45deg);
+}
+
+/* ==================== RESPONSIVE UTILITIES ==================== */
+
+/* Section padding responsive */
+.section-padding {
+  padding-top: var(--space-section-mobile);
+  padding-bottom: var(--space-section-mobile);
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: var(--space-section-tablet);
+    padding-bottom: var(--space-section-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: var(--space-section-desktop);
+    padding-bottom: var(--space-section-desktop);
+  }
+}
+
+/* Container max width */
+.container-max {
+  max-width: 1152px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* ==================== BACKDROP & OVERLAYS ==================== */
+
+.backdrop-blur-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Hero overlay with better contrast */
+.hero-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+/* ==================== SELECTION ==================== */
+
+::selection {
+  background: var(--main-green);
+  color: var(--main-dark);
+}

@@ -1,0 +1,9 @@
+export { Hero } from "./Hero";
+export { WhyChoose } from "./WhyChoose";
+export { Advantages } from "./Advantages";
+export { Clients } from "./Clients";
+export { ShipperApp } from "./ShipperApp";
+export { CarrierApp } from "./CarrierApp";
+export { HowToStart } from "./HowToStart";
+export { FAQ } from "./FAQ";
+export { CTA } from "./CTA";
