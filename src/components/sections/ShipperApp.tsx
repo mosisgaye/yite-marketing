@@ -1,107 +1,74 @@
 "use client";
 
 import Image from "next/image";
-import { SectionTag } from "../ui/SectionTag";
-import { Button } from "../ui/Button";
-import { HighlightText } from "../ui/HighlightText";
 import { useInView } from "@/hooks/useInView";
 
 const features = [
-  {
-    icon: "📦",
-    title: "Publiez votre expédition",
-    description: "Décrivez votre colis, indiquez les adresses et définissez votre budget.",
-  },
-  {
-    icon: "🔔",
-    title: "Recevez des offres en temps réel",
-    description: "Les transporteurs à proximité vous envoient leurs propositions instantanément.",
-  },
-  {
-    icon: "📍",
-    title: "Suivez en direct",
-    description: "Visualisez votre colis sur la carte et recevez des notifications à chaque étape.",
-  },
-  {
-    icon: "🔐",
-    title: "Livraison sécurisée",
-    description: "Validez la réception avec un code PIN unique pour une transaction protégée.",
-  },
+  { icon: "📦", title: "Publiez votre expédition", description: "Décrivez votre colis et définissez votre budget." },
+  { icon: "🔔", title: "Recevez des offres", description: "Les transporteurs vous envoient leurs propositions." },
+  { icon: "📍", title: "Suivez en direct", description: "Visualisez votre colis sur la carte." },
+  { icon: "🔐", title: "Livraison sécurisée", description: "Validez avec un code PIN unique." },
 ];
 
 export function ShipperApp() {
   const { ref, isInView } = useInView<HTMLDivElement>();
 
   return (
-    <section id="expediteur" className="py-12 sm:py-16 md:py-24 bg-white">
-      <div ref={ref} className="max-w-[1152px] mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          {/* Image à gauche */}
-          <div
-            className={`relative transition-all duration-700 ${
-              isInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"
-            }`}
-          >
-            <div className="relative aspect-[720/1600] max-w-[240px] sm:max-w-[280px] md:max-w-[320px] mx-auto lg:mx-0">
-              {/* Background decorative elements */}
-              <div className="absolute -inset-3 sm:-inset-4 bg-gradient-to-br from-[#C1F11D]/20 to-[#E4FFF2]/40 rounded-[32px] sm:rounded-[40px] -z-10" />
-              <div className="hidden sm:block absolute -bottom-6 -right-6 w-32 h-32 bg-[#C1F11D]/30 rounded-full blur-2xl -z-10" />
-
+    <section id="expediteur" className="py-12 md:py-20 bg-white">
+      <div ref={ref} className="px-4 md:px-6 max-w-[1152px] mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Image */}
+          <div className={`transition-all duration-700 ${isInView ? "opacity-100" : "opacity-0"}`}>
+            <div className="relative aspect-[9/16] max-w-[200px] md:max-w-[280px] mx-auto">
+              <div className="absolute -inset-3 bg-gradient-to-br from-[#C1F11D]/20 to-[#E4FFF2]/40 rounded-3xl -z-10" />
               <Image
                 src="/images/expediteur.jpeg"
-                alt="Application YITE pour les expéditeurs"
+                alt="App Expéditeur YITE"
                 fill
-                className="object-contain rounded-[24px] sm:rounded-[32px] shadow-2xl"
-                sizes="(max-width: 640px) 240px, (max-width: 768px) 280px, 320px"
+                className="object-contain rounded-2xl shadow-xl"
+                sizes="(max-width: 768px) 200px, 280px"
               />
             </div>
           </div>
 
-          {/* Texte à droite */}
-          <div
-            className={`transition-all duration-700 delay-200 ${
-              isInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"
-            }`}
-          >
-            <SectionTag className="mb-4">Pour les expéditeurs</SectionTag>
+          {/* Text */}
+          <div className={`transition-all duration-700 delay-100 ${isInView ? "opacity-100" : "opacity-0"}`}>
+            <span className="inline-block px-3 py-1 bg-[#E4FFF2] text-[#141414] text-xs font-medium rounded-full mb-3">
+              Pour les expéditeurs
+            </span>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-              Envoyez vos colis <HighlightText>en toute simplicité</HighlightText>
+            <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-[#141414] leading-tight mb-3">
+              Envoyez vos colis{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10">simplement</span>
+                <span className="absolute bottom-0.5 left-0 w-full h-2 bg-[#C1F11D] -z-0 opacity-60" />
+              </span>
             </h2>
 
-            <p className="text-base sm:text-lg text-[rgba(20,20,20,0.7)] mb-6 sm:mb-8">
-              YITE connecte vos besoins de livraison aux transporteurs les plus proches.
-              Publiez, comparez les offres et suivez en temps réel.
+            <p className="text-sm text-[#141414]/70 mb-6">
+              YITE connecte vos besoins aux transporteurs les plus proches.
             </p>
 
-            <div className="space-y-4 sm:space-y-5 mb-6 sm:mb-8">
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className={`flex gap-3 sm:gap-4 transition-all duration-500 ${
-                    isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                  }`}
-                  style={{ transitionDelay: `${300 + index * 100}ms` }}
-                >
-                  <span className="w-10 h-10 sm:w-12 sm:h-12 bg-[#E4FFF2] rounded-lg sm:rounded-xl flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
-                    {feature.icon}
+            <div className="space-y-3 mb-6">
+              {features.map((f, i) => (
+                <div key={i} className="flex gap-3 items-start">
+                  <span className="w-9 h-9 bg-[#E4FFF2] rounded-lg flex items-center justify-center text-base flex-shrink-0">
+                    {f.icon}
                   </span>
                   <div>
-                    <h4 className="font-bold text-[#141414] mb-0.5 sm:mb-1 text-sm sm:text-base">{feature.title}</h4>
-                    <p className="text-xs sm:text-sm text-[rgba(20,20,20,0.7)]">{feature.description}</p>
+                    <h4 className="text-sm font-semibold text-[#141414]">{f.title}</h4>
+                    <p className="text-xs text-[#141414]/60">{f.description}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button variant="primary" size="lg" className="w-full sm:w-auto">
-                Télécharger l&apos;app
-              </Button>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                En savoir plus
-              </Button>
-            </div>
+            <a
+              href="#"
+              className="inline-block w-full md:w-auto py-3 px-6 bg-[#C1F11D] text-[#141414] text-sm font-semibold rounded-xl text-center hover:bg-[#9DD90D] transition-colors"
+            >
+              Télécharger l&apos;app
+            </a>
           </div>
         </div>
       </div>

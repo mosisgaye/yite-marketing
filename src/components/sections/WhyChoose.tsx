@@ -1,98 +1,53 @@
-import { Card } from "../ui/Card";
-import { HighlightText } from "../ui/HighlightText";
+"use client";
+
+import { useInView } from "@/hooks/useInView";
 
 const features = [
   {
-    title: "Système d'enchères en temps réel",
-    description:
-      "Publiez votre expédition et recevez des offres instantanément. Les transporteurs à proximité enchérissent, vous choisissez la meilleure offre.",
-    icon: (
-      <svg
-        width="64"
-        height="64"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="64" height="64" rx="16" fill="#C1F11D" fillOpacity="0.2" />
-        <path
-          d="M32 16V48M24 24L32 16L40 24M24 40L32 48L40 40"
-          stroke="#141414"
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="32" cy="32" r="8" stroke="#C1F11D" strokeWidth="3" />
-      </svg>
-    ),
+    icon: "⚡",
+    title: "Enchères en temps réel",
+    description: "Publiez et recevez des offres instantanément des transporteurs à proximité.",
   },
   {
+    icon: "📍",
     title: "Suivi GPS en direct",
-    description:
-      "Suivez votre colis en temps réel sur la carte. Notifications automatiques à chaque étape : enlèvement, en route, livraison.",
-    icon: (
-      <svg
-        width="64"
-        height="64"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="64" height="64" rx="16" fill="#C1F11D" fillOpacity="0.2" />
-        <circle cx="32" cy="28" r="12" stroke="#141414" strokeWidth="3" />
-        <circle cx="32" cy="28" r="4" fill="#C1F11D" />
-        <path
-          d="M32 40V48M24 44H40"
-          stroke="#141414"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    description: "Suivez votre colis sur la carte avec notifications à chaque étape.",
   },
   {
+    icon: "✅",
     title: "Transporteurs vérifiés",
-    description:
-      "Tous nos transporteurs sont vérifiés : identité, permis, assurance. Consultez les notes et avis avant de choisir.",
-    icon: (
-      <svg
-        width="64"
-        height="64"
-        viewBox="0 0 64 64"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="64" height="64" rx="16" fill="#C1F11D" fillOpacity="0.2" />
-        <path
-          d="M32 20L35.5 27L43 28L37.5 33.5L39 41L32 37L25 41L26.5 33.5L21 28L28.5 27L32 20Z"
-          stroke="#141414"
-          strokeWidth="3"
-          strokeLinejoin="round"
-        />
-        <circle cx="32" cy="32" r="16" stroke="#C1F11D" strokeWidth="2" />
-      </svg>
-    ),
+    description: "Identité, permis et assurance vérifiés. Consultez les notes et avis.",
   },
 ];
 
 export function WhyChoose() {
+  const { ref, isInView } = useInView<HTMLDivElement>();
+
   return (
-    <section className="py-20 bg-[#E4FFF2]">
-      <div className="max-w-[1152px] mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl lg:text-[64px] font-bold text-center mb-16 leading-tight">
+    <section className="py-10 md:py-16 bg-[#E4FFF2]">
+      <div ref={ref} className="px-4 md:px-6 max-w-[1152px] mx-auto">
+        <h2 className={`text-xl md:text-3xl font-bold text-center mb-8 transition-all duration-700 ${isInView ? "opacity-100" : "opacity-0"}`}>
           Pourquoi choisir{" "}
-          <HighlightText>YITE</HighlightText> ?
+          <span className="relative inline-block">
+            <span className="relative z-10">YITE</span>
+            <span className="absolute bottom-0.5 left-0 w-full h-2 bg-[#C1F11D] -z-0 opacity-60" />
+          </span>
+          {" "}?
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {features.map((feature, index) => (
-            <Card key={index} hover className="text-center p-8">
-              <div className="flex justify-center mb-6">{feature.icon}</div>
-              <h3 className="text-xl font-bold text-[#141414] mb-4">
-                {feature.title}
-              </h3>
-              <p className="text-[rgba(20,20,20,0.7)]">{feature.description}</p>
-            </Card>
+        <div className="grid md:grid-cols-3 gap-4">
+          {features.map((f, i) => (
+            <div
+              key={i}
+              className={`bg-white rounded-2xl p-5 text-center transition-all duration-500 ${isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <span className="inline-flex w-12 h-12 bg-[#C1F11D]/20 rounded-xl items-center justify-center text-2xl mb-3">
+                {f.icon}
+              </span>
+              <h3 className="text-sm font-bold text-[#141414] mb-2">{f.title}</h3>
+              <p className="text-xs text-[#141414]/70">{f.description}</p>
+            </div>
           ))}
         </div>
       </div>
