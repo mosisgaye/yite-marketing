@@ -23,11 +23,11 @@ function AnimatedStat({
 
   return (
     <div className="text-center sm:text-left">
-      <div className="text-3xl md:text-4xl font-bold text-[#C1F11D]">
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#C1F11D]">
         {count.toLocaleString()}
         {suffix}
       </div>
-      <div className="text-sm text-white/70">{label}</div>
+      <div className="text-xs sm:text-sm text-white/70">{label}</div>
     </div>
   );
 }
@@ -36,7 +36,7 @@ export function Hero() {
   const { ref, isInView } = useInView<HTMLDivElement>({ threshold: 0.3 });
 
   return (
-    <section className="relative h-[80vh] min-h-[550px] max-h-[700px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[100svh] sm:min-h-[85vh] sm:max-h-[750px] flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <Image
         src="/banner.png"
@@ -50,17 +50,17 @@ export function Hero() {
       {/* Overlay gradient - improved contrast */}
       <div className="absolute inset-0 hero-overlay" />
 
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-[#C1F11D] rounded-full opacity-20 blur-3xl animate-float" />
+      {/* Decorative elements - hidden on mobile */}
+      <div className="hidden sm:block absolute top-20 left-10 w-32 h-32 bg-[#C1F11D] rounded-full opacity-20 blur-3xl animate-float" />
       <div
-        className="absolute bottom-20 right-10 w-48 h-48 bg-[#C1F11D] rounded-full opacity-20 blur-3xl animate-float"
+        className="hidden sm:block absolute bottom-20 right-10 w-48 h-48 bg-[#C1F11D] rounded-full opacity-20 blur-3xl animate-float"
         style={{ animationDelay: "1s" }}
       />
 
       {/* Content */}
       <div
         ref={ref}
-        className="relative z-10 max-w-[1152px] mx-auto px-6 py-16 pt-24"
+        className="relative z-10 max-w-[1152px] mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-16"
       >
         <div className="max-w-2xl">
           {/* Title with animation */}
@@ -90,23 +90,23 @@ export function Hero() {
 
           {/* CTA Buttons with animation */}
           <div
-            className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-700 delay-200 ${
+            className={`flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 transition-all duration-700 delay-200 ${
               isInView
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
             }`}
           >
-            <Button variant="primary" size="lg">
+            <Button variant="primary" size="lg" className="w-full sm:w-auto">
               Télécharger l&apos;appli
             </Button>
-            <Button variant="secondary" size="lg">
+            <Button variant="secondary" size="lg" className="w-full sm:w-auto">
               Devenir transporteur
             </Button>
           </div>
 
           {/* Stats with count-up animation */}
           <div
-            className={`mt-12 grid grid-cols-3 gap-4 sm:gap-8 max-w-md transition-all duration-700 delay-300 ${
+            className={`mt-8 sm:mt-12 grid grid-cols-3 gap-2 sm:gap-8 transition-all duration-700 delay-300 ${
               isInView
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
