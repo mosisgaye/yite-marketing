@@ -55,9 +55,9 @@ export function Footer() {
           <div>
             <h4 className="text-xs font-bold text-[#141414] mb-2">Légal</h4>
             <ul className="space-y-1 text-xs text-[#141414]/70">
-              <li><Link href="#">CGU</Link></li>
-              <li><Link href="#">Confidentialité</Link></li>
-              <li><Link href="#">Mentions légales</Link></li>
+              <li><Link href="/legal/cgu">CGU</Link></li>
+              <li><Link href="/legal/confidentialite">Confidentialité</Link></li>
+              <li><Link href="/legal/mentions-legales">Mentions légales</Link></li>
             </ul>
           </div>
         </div>
